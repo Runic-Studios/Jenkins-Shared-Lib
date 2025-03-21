@@ -9,8 +9,4 @@ RUN apk add --no-cache \
     jq \
     yq \
     github-cli \
-    less \
-  && addgroup -S jenkins \
-  && adduser -S jenkins -G jenkins
-
-USER jenkins
+    less
