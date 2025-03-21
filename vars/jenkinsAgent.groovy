@@ -20,15 +20,10 @@ def call(steps) {
         }
         """.stripIndent().trim()
 
-        steps.writeFile file: 'docker-config.json', text: dockerCfg
-
-        steps.sh '''
-        kubectl delete secret regcred -n jenkins --ignore-not-found
-        kubectl create secret generic regcred \
-            --from-file=.dockerconfigjson=docker-config.json \
-            --type=kubernetes.io/dockerconfigjson \
-            -n jenkins
-        '''
+        sh """
+        kubectl delete secret regcred -n jenkins --ignore-not-found || true
+        echo "${dockerCfg}" | kubectl create secret generic regcred --type=kubernetes.io/dockerconfigjson --from-file=.dockerconfigjson=/dev/stdin -n jenkins
+        """
 
         podYaml = """
         apiVersion: v1
