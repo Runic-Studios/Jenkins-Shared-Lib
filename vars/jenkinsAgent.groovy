@@ -1,11 +1,11 @@
-static def call() {
+static def call(String registry) {
     return """
     apiVersion: v1
     kind: Pod
     spec:
       containers:
       - name: jenkins-agent
-        image: registry.runicrealms.com/jenkins-agent:latest
+        image: ${registry}/jenkins-agent:latest
         command:
         - cat
         tty: true
