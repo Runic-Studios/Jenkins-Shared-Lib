@@ -11,6 +11,7 @@ static def call(String registry) {
         tty: true
         securityContext:
           privileged: true
+          runAsUser: 0
         volumeMounts:
         - name: docker-sock
           mountPath: /var/run/docker.sock

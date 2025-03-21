@@ -1,6 +1,7 @@
 def call(String imageName, String tag, String registry) {
     withCredentials([usernamePassword(credentialsId: 'docker-registry-credentials', usernameVariable: 'REGISTRY_USER', passwordVariable: 'REGISTRY_PASSWORD')]) {
         sh """
+            echo "I am: \$(whoami)"
             echo "Checking for Docker CLI..."
             echo "Current PATH: \$PATH"
             which docker || echo "docker not found in PATH"
