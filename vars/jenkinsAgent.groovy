@@ -20,7 +20,7 @@ def call(steps) {
         }
         """.stripIndent().trim()
 
-        sh """
+        steps.sh """
         kubectl delete secret regcred -n jenkins --ignore-not-found || true
         echo "${dockerCfg}" | kubectl create secret generic regcred --type=kubernetes.io/dockerconfigjson --from-file=.dockerconfigjson=/dev/stdin -n jenkins
         """
