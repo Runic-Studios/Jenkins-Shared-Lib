@@ -8,6 +8,9 @@ def call(String deploymentBranch, String imageName, String tag, String registry)
             echo "Updating kustomization.yaml..."
             yq eval -i '(.. | select(has("name") and .name == "${registry}/${imageName}").newTag) = "${tag}"' Realm-Deployment/base/kustomization.yaml
 
+            git config --global user.email "runicrealms.mc@gmail.com"
+            git config --global user.name "RunicRealmsGithub"
+
             cd Realm-Deployment
             git add base/kustomization.yaml
             git commit -m "Update ${imageName} image to ${tag}"
