@@ -8,6 +8,8 @@ static def call(String registry) {
         image: ${registry}/jenkins-agent:latest
         command:
         - /entrypoint.sh
+        args:
+        - cat
         tty: true
         securityContext:
           privileged: true
