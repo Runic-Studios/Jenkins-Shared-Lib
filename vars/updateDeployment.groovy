@@ -1,4 +1,4 @@
-def call(String deploymentBranch, String imageName, String tag, String registry) {
+def call(String deploymentBranch, String imageName, String tag, String registry, String registryProject) {
     withCredentials([sshUserPrivateKey(credentialsId: 'github-ssh', keyFileVariable: 'SSH_KEY')]) {
         sh """
             rm -rf Realm-Deployment
@@ -6,7 +6,7 @@ def call(String deploymentBranch, String imageName, String tag, String registry)
             git clone --branch ${deploymentBranch} git@github.com:Runic-Studios/Realm-Deployment.git Realm-Deployment
 
             echo "Updating kustomization.yaml..."
-            yq eval -i '(.. | select(has("name") and .name == "${registry}/${imageName}").newTag) = "${tag}"' Realm-Deployment/base/kustomization.yaml
+            yq eval -i '(.. | select(has("name") and .name == "${registry}/${registryProject}/${imageName}").newTag) = "${tag}"' Realm-Deployment/base/kustomization.yaml
 
             git config --global user.email "runicrealms.mc@gmail.com"
             git config --global user.name "RunicRealmsGithub"
