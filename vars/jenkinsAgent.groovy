@@ -5,7 +5,7 @@ static def call(String registry) {
     spec:
       containers:
       - name: jenkins-agent
-        image: ${registry}/jenkins-agent:latest
+        image: ${registry}/jenkins/jenkins-agent:latest
         command:
         - cat
         tty: true
