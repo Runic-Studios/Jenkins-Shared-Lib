@@ -5,8 +5,8 @@ def call(String artifactName, String tag, String tagSuffix, String path, String 
             oras login ${registry} -u '$REGISTRY_USER' -p '$REGISTRY_PASSWORD' --insecure
 
             echo "Pushing artifact..."
-            oras push ${registry}/${registryProject}/${artifactName}:${tag}${tagSuffix} --artifact-type application/java-archive ${path}
-            oras push ${registry}/${registryProject}/${artifactName}:latest${tagSuffix} --artifact-type application/java-archive ${path}
+            oras push --plain-http ${registry}/${registryProject}/${artifactName}:${tag}${tagSuffix} --artifact-type application/java-archive ${path}
+            oras push --plain-http ${registry}/${registryProject}/${artifactName}:latest${tagSuffix} --artifact-type application/java-archive ${path}
         """
     }
 }
