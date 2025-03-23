@@ -16,6 +16,7 @@ RUN apk add --no-cache \
     unzip \
     shadow \
     docker-cli \
+    github-cli \
     openssh-client \
     && addgroup -S docker && adduser -S docker -G docker
 
