@@ -13,7 +13,7 @@ def call(String deploymentBranch, String imageName, String tag, String registry,
 
             cd Realm-Deployment
             git add base/kustomization.yaml
-            git commit -m "Update ${imageName} image to ${tag}"
+            git commit -m "Update ${imageName} image to ${tag}" || true
             git push origin ${deploymentBranch}
 
             rm -rf Realm-Deployment
