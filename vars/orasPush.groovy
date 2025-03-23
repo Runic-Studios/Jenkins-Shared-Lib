@@ -1,4 +1,4 @@
-def call(String artifactName, String tag, String tagSuffix, String path, String registry, String registryProject) {
+def call(String artifactName, String tag, String path, String registry, String registryProject) {
     withCredentials([usernamePassword(credentialsId: 'docker-registry-credentials', usernameVariable: 'REGISTRY_USER', passwordVariable: 'REGISTRY_PASSWORD')]) {
         sh """
             echo "Logging into registry..."
@@ -9,8 +9,7 @@ def call(String artifactName, String tag, String tagSuffix, String path, String 
             FILEDIR=\$(dirname ${path})
             cd "\$FILEDIR"
 
-            oras push --plain-http ${registry}/${registryProject}/${artifactName}:${tag}${tagSuffix} --artifact-type application/java-archive "\$FILENAME"
-            oras push --plain-http ${registry}/${registryProject}/${artifactName}:latest${tagSuffix} --artifact-type application/java-archive "\$FILENAME"
+            oras push --plain-http ${registry}/${registryProject}/${artifactName}:${tag} --artifact-type application/java-archive "\$FILENAME"
         """
     }
 }
