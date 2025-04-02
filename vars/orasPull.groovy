@@ -6,7 +6,7 @@ def call(String artifactName, String tag, String path, String registry, String r
             mkdir -p ${path}
 
             echo "Pulling artifact..."
-            oras pull --plain-http ${registry}/${registryProject}/${artifactName}:${tag} -o ${path}
+            oras pull ${registry}/${registryProject}/${artifactName}:${tag} -o ${path}
         """
     }
 }

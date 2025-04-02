@@ -9,7 +9,7 @@ def call(String artifactName, String tag, String path, String registry, String r
             FILEDIR=\$(dirname ${path})
             cd "\$FILEDIR"
 
-            oras push --plain-http ${registry}/${registryProject}/${artifactName}:${tag} --artifact-type application/java-archive "\$FILENAME"
+            oras push ${registry}/${registryProject}/${artifactName}:${tag} --artifact-type application/java-archive "\$FILENAME"
         """
     }
 }
