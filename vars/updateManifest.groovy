@@ -1,4 +1,4 @@
-def call(String branch, String repository, String repositoryPath, String imageName, String tag, String registry, String registryProject) {
+def call(String branch, String repository, String repositoryPath, String imageName, String tag, String tagPath) {
     withCredentials([sshUserPrivateKey(credentialsId: 'github-ssh', keyFileVariable: 'SSH_KEY')]) {
         sh """
             rm -rf ${repository}
@@ -6,7 +6,7 @@ def call(String branch, String repository, String repositoryPath, String imageNa
             git clone --branch ${branch} git@github.com:Runic-Studios/${repository}.git ${repository}
 
             echo "Updating ${repositoryPath}..."
-            yq eval -i '(.. | select(has("name") and .name == "${registry}/${registryProject}/${imageName}").newTag) = "${tag}"' ${repository}/${repositoryPath}
+            yq eval -i '.${tagPath} = "${tag}"' ${repository}/${repositoryPath}
 
             git config --global user.email "runicrealms.mc@gmail.com"
             git config --global user.name "RunicRealmsGithub"
