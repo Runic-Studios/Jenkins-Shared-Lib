@@ -1,10 +1,10 @@
-static def call(Map<String, String>... containers) {
-    def containerYaml = containers.collect { c ->
+static def call(Map<String, String> containers) {
+    def containerYaml = containers.collect { name, image ->
         """\
-  - name: ${c.key}
-    image: ${c.value}
+  - name: ${name}
+    image: ${image}
     command:
-    - cat
+    - cat 
     tty: true
     securityContext:
       privileged: true
