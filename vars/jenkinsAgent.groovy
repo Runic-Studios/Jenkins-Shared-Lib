@@ -19,6 +19,11 @@ static def call(Map<String, String> containers) {
 apiVersion: v1
 kind: Pod
 spec:
+  dnsPolicy: None
+  dnsConfig:
+    nameservers:
+      - 1.1.1.1
+      - 8.8.8.8
   containers:
 ${containerYaml}  imagePullSecrets:
   - name: regcred
