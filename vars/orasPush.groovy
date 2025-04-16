@@ -2,7 +2,7 @@ def call(String artifactName, String tag, String path, String registry, String r
     withCredentials([usernamePassword(credentialsId: 'docker-registry-credentials', usernameVariable: 'REGISTRY_USER', passwordVariable: 'REGISTRY_PASSWORD')]) {
         sh """
             echo "Logging into registry..."
-            oras login ${registry} -u '$REGISTRY_USER' -p '$REGISTRY_PASSWORD' --insecure
+            oras login ${registry} -u '$REGISTRY_USER' -p '$REGISTRY_PASSWORD'
 
             echo "Pushing artifact..."
             FILENAME=\$(basename ${path})
