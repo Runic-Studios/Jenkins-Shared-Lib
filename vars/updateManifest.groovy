@@ -3,7 +3,7 @@ def call(String branch, String repository, String repositoryPath, String imageNa
         sh """
             rm -rf ${repository}
             export GIT_SSH_COMMAND='ssh -i $SSH_KEY -o StrictHostKeyChecking=no'
-            git clone --branch ${branch} git@github.com:Runic-Studios/${repository}.git ${repository}
+            git clone --depth 1 --branch ${branch} git@github.com:Runic-Studios/${repository}.git ${repository}
 
             echo "Updating ${repositoryPath}..."
             yq eval -i '.${tagPath} = "${tag}"' ${repository}/${repositoryPath}
